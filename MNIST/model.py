@@ -34,10 +34,6 @@ class CZRing(nn.Module):
             tq.CZ()(qdev, wires=[i, (i + 2) % self.n_wires])
 
 
-import torch
-import torch.nn as nn
-import torchquantum as tq
-
 class SimpleQNN(nn.Module):
     def __init__(self, n_wires=16, n_classes=10):
         super().__init__()
