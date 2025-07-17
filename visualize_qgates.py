@@ -1,21 +1,29 @@
 from qiskit import QuantumCircuit
-from qiskit.circuit.library import U3Gate, CU3Gate
+from qiskit.circuit.library import U3Gate
+from qiskit.visualization import circuit_drawer
 import matplotlib.pyplot as plt
 
-n_qubits = 4
-depth = 3
+def build_qnn_circuit(n_qubits=4, q_depth=3, theta=0.3, phi=0.2, lam=0.1):
+    qc = QuantumCircuit(n_qubits)
 
-qc = QuantumCircuit(n_qubits)
-theta, phi, lam = 0.3, 0.2, 0.1
+    for depth in range(q_depth):
+        # U3 gates
+        for q in range(n_qubits):
+            qc.u(theta, phi, lam, q)
 
-for _ in range(depth):
-    for q in range(n_qubits):
-        qc.append(U3Gate(theta, phi, lam), [q])
-    for q in range(n_qubits):
-        control = q
-        target = (q + 1) % n_qubits
-        qc.append(CU3Gate(theta, phi, lam), [control, target])
+        # CU3 gates — circular
+        for q in range(n_qubits):
+            control = q
+            target = (q + 1) % n_qubits
+            qc.append(U3Gate(theta, phi, lam).control(1), [control, target])
 
-# Plot and show explicitly
-fig = qc.draw('mpl', fold = -1)
-plt.show()
+    return qc
+
+
+if __name__ == "__main__":
+    qc = build_qnn_circuit(n_qubits=4, q_depth=3)
+
+    fig = circuit_drawer(qc, output='mpl', style='iqx', fold = -1)
+    plt.tight_layout()
+    plt.savefig("qnn_circuit.png", dpi=300)
+    plt.show()

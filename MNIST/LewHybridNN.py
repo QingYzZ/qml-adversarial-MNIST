@@ -25,7 +25,7 @@ class LewHybridNN(nn.Module):
                 self.u3_layers.append(tq.Op1QAllLayer(op=tq.U3, n_wires=self.n_wires, has_params=True, trainable=True))
                 self.cu3_layers.append(tq.Op2QAllLayer(op=tq.CU3, n_wires=self.n_wires, has_params=True, trainable=True, circular=True))
 
-        def forward(self, qdev):
+        def forward(self):
             qdev = tq.QuantumDevice(n_wires=self.n_wires, bsz=1, device=next(self.parameters()).device)
             easy_scale_coeff = 2 ** (self.n_wires - 1)
             gamma, beta, alpha = 0.1, 0.8, 0.3
