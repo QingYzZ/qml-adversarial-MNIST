@@ -1,6 +1,6 @@
 # qml-adversarial-MNIST
 
-## Code is build upon https://github.com/Hon-Hai-Quantum-Computing/QuantumTrain
+Code is build upon https://github.com/Hon-Hai-Quantum-Computing/QuantumTrain
 ## Setup
 Install Miniconda manually from https://docs.conda.io/en/latest/miniconda.html
 
