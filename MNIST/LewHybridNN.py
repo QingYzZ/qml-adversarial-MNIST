@@ -1,5 +1,3 @@
-# MNIST/model.py (updated for learnable hybrid model)
-
 import torch
 import torch.nn as nn
 import torchquantum as tq

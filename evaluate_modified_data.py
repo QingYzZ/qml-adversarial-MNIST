@@ -10,7 +10,7 @@ from MNIST.ClassicalCNN import ClassicalCNN
 import random
 
 
-# 🧪 Custom: Add Gaussian Noise
+# Custom: Add Gaussian Noise
 class AddGaussianNoise(object):
     def __init__(self, mean=0., std=0.3):
         self.mean = mean
@@ -20,7 +20,7 @@ class AddGaussianNoise(object):
         return tensor + torch.randn(tensor.size()) * self.std + self.mean
 
 
-# 🧪 Custom: Add Occlusion Mask
+# Custom: Add Occlusion Mask
 class AddOcclusion(object):
     def __init__(self, size=8):
         self.size = size
@@ -33,7 +33,7 @@ class AddOcclusion(object):
         return tensor
 
 
-# 🧠 Load models
+# Load models
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model_q = LewHybridNN().to(device)
@@ -44,7 +44,7 @@ model_c = ClassicalCNN().to(device)
 model_c.load_state_dict(torch.load("classical_cnn.pth"))
 model_c.eval()
 
-# 📊 Evaluation function
+# Evaluation function
 def evaluate(model, loader):
     correct = 0
     total = 0
@@ -59,7 +59,7 @@ def evaluate(model, loader):
     return correct / total
 
 
-# 🧪 Define corruptions
+# Define corruptions
 corruptions = {
     "Original": transforms.Compose([
         transforms.ToTensor(),
@@ -88,7 +88,7 @@ corruptions = {
 }
 
 
-# 🧪 Run Evaluation Across All Corruptions
+# Run Evaluation Across All Corruptions
 hybrid_accs = []
 classical_accs = []
 
@@ -107,7 +107,7 @@ for name, transform in corruptions.items():
     print(f"Classical CNN Accuracy: {acc_c * 100:.2f}%")
 
 
-# 📊 Final Bar Chart
+# Final Bar Chart
 labels = list(corruptions.keys())
 x = np.arange(len(labels))
 width = 0.35

@@ -65,13 +65,13 @@ def train_model(model, train_loader, device, optimizer, criterion, num_epochs):
 criterion = nn.CrossEntropyLoss()
 
 # Model 1: Quantum Hybrid
-print("\n🔬 Training Hybrid Quantum-Classical Model")
+print("Training Hybrid Quantum-Classical Model")
 model_q = LewHybridNN()
 optimizer_q = optim.Adam(model_q.parameters(), lr=learning_rate)
 loss_q, acc_q = train_model(model_q, train_loader, device, optimizer_q, criterion, num_epochs)
 
 # Model 2: Classical CNN
-print("\n🧠 Training Classical CNN Model")
+print("Training Classical CNN Model")
 model_c = ClassicalCNN()
 optimizer_c = optim.Adam(model_c.parameters(), lr=learning_rate)
 loss_c, acc_c = train_model(model_c, train_loader, device, optimizer_c, criterion, num_epochs)
